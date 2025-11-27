@@ -1,0 +1,48 @@
+.container-produto {
+  width: 85%;
+  margin: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background-color: #dddddd;
+}
+
+.btn-delete {
+  padding: 6px 10px;
+  background-color: red;
+  color: white;
+  border: none;
+  margin-right: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-edit {
+  padding: 6px 10px;
+  background-color: #005eff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: darkred;
+}
+
+.btn-edit:hover {
+  background-color: #003c9c;
+}
