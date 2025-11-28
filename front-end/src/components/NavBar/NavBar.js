@@ -8,27 +8,27 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <div className="nav-logo">📦 ProdutosApp</div>
+      <div className="nav-logo">ProdutosApp</div>
 
       <ul className="nav-links">
         <li className={location.pathname === "/" ? "active" : ""}>
           <Link to="/">Home</Link>
         </li>
 
-        <li className={location.pathname === "/produtos" ? "active" : ""}>
-          <Link to="/produtos">Lista Produtos</Link>
+        <li className={location.pathname === "./ListaProduto" ? "active" : ""}>
+          <Link to="/ListaProduto">Lista Produtos</Link>
         </li>
 
-        <li className={location.pathname === "/cadastro-produto" ? "active" : ""}>
-          <Link to="/cadastro-produto">Cadastro Produto</Link>
+        <li className={location.pathname === "/CadastroProduto" ? "active" : ""}>
+          <Link to="/CadastroProduto">Cadastro Produto</Link>
         </li>
 
-        <li className={location.pathname === "/categorias" ? "active" : ""}>
-          <Link to="/categorias">Lista Categorias</Link>
+        <li className={location.pathname === "/ListaCategoria" ? "active" : ""}>
+          <Link to="/ListaCategoria">Lista Categorias</Link>
         </li>
 
-        <li className={location.pathname === "/cadastro-categoria" ? "active" : ""}>
-          <Link to="/cadastro-categoria">Cadastro Categoria</Link>
+        <li className={location.pathname === "/CadastroCategoria" ? "active" : ""}>
+          <Link to="/CadastroCategoria">Cadastro Categoria</Link>
         </li>
       </ul>
     </nav>

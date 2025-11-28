@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CadastroProduto.css";
 
 function CadastroProduto() {
@@ -16,7 +16,7 @@ function CadastroProduto() {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/produto", {
+      const response = await fetch("http://localhost:4567/produtos", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

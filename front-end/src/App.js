@@ -8,10 +8,10 @@ import NavBar from "./components/NavBar/NavBar";
 
 // PAGES
 import Home from "./pages/home/Home";
-import Produto from "./pages/lista/produto/Produtoroduto";
-import CadastroProduto from "./pages/cadastro/Produto/CadastroProduto";
-import CadastroCategoria from "./pages/cadastro/Produto/CadastroCategoria";
-import Categoria from "./pages/lista/categoria/Categoria"; // se tiver
+import ListaProduto from "./pages/lista/listaProduto/ListaProduto";
+import CadastroProduto from "./pages/cadastro/cadastroProduto/CadastroProduto";
+import ListaCategoria from "./pages/lista/listaCategoria/ListaCategoria";
+import CadastroCategoria from "./pages/cadastro/cadastroCategoria/CadastroCategoria";
 
 function App() {
   return (
@@ -19,11 +19,11 @@ function App() {
       <NavBar />
       <div className="mainContent">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/produtos" element={<Produto />} />
-          <Route path="/cadastro-produto" element={<CadastroProduto />} />
-          <Route path="/categorias" element={<Categoria />} />
-          <Route path="/cadastro-categoria" element={<CadastroCategoria />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/ListaProdutos" element={<ListaProduto />} />
+          <Route path="/CadastroProduto" element={<CadastroProduto />} />
+          <Route path="/ListaCategoria" element={<ListaCategoria />} />
+          <Route path="/CadastroCategoria" element={<CadastroCategoria />} />
         </Routes>
       </div>
     </Router>
