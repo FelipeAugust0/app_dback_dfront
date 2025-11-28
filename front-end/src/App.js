@@ -19,11 +19,14 @@ function App() {
       <NavBar />
       <div className="mainContent">
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/ListaProdutos" element={<ListaProduto />} />
           <Route path="/CadastroProduto" element={<CadastroProduto />} />
           <Route path="/ListaCategoria" element={<ListaCategoria />} />
           <Route path="/CadastroCategoria" element={<CadastroCategoria />} />
+
+          {/* fallback para home */}
+          <Route path="*" element={<Home />} />
         </Routes>
       </div>
     </Router>

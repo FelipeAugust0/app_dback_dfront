@@ -12,12 +12,12 @@ table {
 
 th, td {
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #3b3b3b;
   text-align: center;
 }
 
 th {
-  background-color: #dddddd;
+  background-color: #3d3d3d;
 }
 
 .btn-delete {

@@ -15,8 +15,8 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
 
-        <li className={location.pathname === "./ListaProduto" ? "active" : ""}>
-          <Link to="/ListaProduto">Lista Produtos</Link>
+        <li className={location.pathname === "/ListaProdutos" ? "active" : ""}>
+          <Link to="/ListaProdutos">Lista Produtos</Link>
         </li>
 
         <li className={location.pathname === "/CadastroProduto" ? "active" : ""}>
