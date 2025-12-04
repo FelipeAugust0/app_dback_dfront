@@ -1,18 +1,48 @@
 // Base URL da API
 const BASE_URL = "http://localhost:4567";
 
+/**
+ * Função auxiliar para tratar a resposta do fetch.
+ * Verifica se a resposta foi bem-sucedida (response.ok) e
+ * tenta extrair o JSON ou lança um erro com a mensagem do servidor.
+ */
+const handleResponse = async (response) => {
+  // Se o status da resposta for 200-299, retorna a resposta
+  if (response.ok) {
+    // 204 No Content (como o DELETE) não possui corpo JSON, retorna true
+    if (response.status === 204) return true;
+    
+    // Se a resposta estiver OK (200, 201), tenta ler o JSON
+    return response.json();
+  } 
+  
+  // Se o status for de erro (4xx ou 5xx)
+  let errorData;
+  try {
+    // Tenta ler o corpo como JSON (onde a API Spark retorna a mensagem de erro)
+    errorData = await response.json();
+  } catch (e) {
+    // Se não for JSON (ex: erro de servidor simples), lê como texto
+    errorData = await response.text();
+  }
+  
+  // Lança um erro com a mensagem do servidor e o status
+  const errorMessage = errorData.mensagem || errorData || `Erro ${response.status}: Falha na requisição.`;
+  throw new Error(errorMessage);
+};
+
 // ============================
 // PRODUTOS
 // ============================
 
 export const getProdutos = async () => {
   const response = await fetch(`${BASE_URL}/produtos`);
-  return response.json();
+  return handleResponse(response);
 };
 
 export const getProdutoById = async (id) => {
   const response = await fetch(`${BASE_URL}/produtos/${id}`);
-  return response.json();
+  return handleResponse(response);
 };
 
 export const createProduto = async (produto) => {
@@ -21,7 +51,7 @@ export const createProduto = async (produto) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(produto),
   });
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updateProduto = async (id, produto) => {
@@ -30,11 +60,12 @@ export const updateProduto = async (id, produto) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(produto),
   });
-  return response.json();
+  return handleResponse(response);
 };
 
 export const deleteProduto = async (id) => {
-  await fetch(`${BASE_URL}/produtos/${id}`, { method: "DELETE" });
+  const response = await fetch(`${BASE_URL}/produtos/${id}`, { method: "DELETE" });
+  return handleResponse(response);
 };
 
 // ============================
@@ -43,12 +74,12 @@ export const deleteProduto = async (id) => {
 
 export const getCategorias = async () => {
   const response = await fetch(`${BASE_URL}/categorias`);
-  return response.json();
+  return handleResponse(response);
 };
 
 export const getCategoriaById = async (id) => {
   const response = await fetch(`${BASE_URL}/categorias/${id}`);
-  return response.json();
+  return handleResponse(response);
 };
 
 export const createCategoria = async (categoria) => {
@@ -57,7 +88,7 @@ export const createCategoria = async (categoria) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(categoria),
   });
-  return response.json();
+  return handleResponse(response);
 };
 
 export const updateCategoria = async (id, categoria) => {
@@ -66,14 +97,10 @@ export const updateCategoria = async (id, categoria) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(categoria),
   });
-  return response.json();
+  return handleResponse(response);
 };
 
 export const deleteCategoria = async (id) => {
   const response = await fetch(`${BASE_URL}/categorias/${id}`, { method: "DELETE" });
-  if (!response.ok && response.status !== 204) {
-    const msg = await response.text();
-    throw new Error(msg || `Falha ao excluir. Status: ${response.status}`);
-  }
-  return true;
+  return handleResponse(response);
 };
