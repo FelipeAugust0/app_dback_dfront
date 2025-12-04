@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./CadastroProduto.css";
 
 function CadastroProduto() {
@@ -6,11 +6,12 @@ function CadastroProduto() {
   const [nome, setNome] = useState("");
   const [preco, setPreco] = useState("");
   const [categoriaId, setCategoriaId] = useState("");
+  const [estoque, setEstoque] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!nome || !preco || !categoriaId) {
+    if (!nome || !preco || !categoriaId || !estoque) {
       alert("Preencha todos os campos.");
       return;
     }
@@ -22,7 +23,8 @@ function CadastroProduto() {
         body: JSON.stringify({
           nome: nome,
           preco: parseFloat(preco),
-          categoriaId: parseInt(categoriaId)
+          estoque: parseInt(estoque),
+          id_categoria: parseInt(categoriaId)
         })
       });
 
@@ -31,6 +33,7 @@ function CadastroProduto() {
         setNome("");
         setPreco("");
         setCategoriaId("");
+        setEstoque("");
       } else {
         alert("Erro ao cadastrar o produto.");
       }
@@ -44,6 +47,7 @@ function CadastroProduto() {
   return (
     <div className="container-cadastro">
       <h2>Cadastrar Produto</h2>
+
       <form onSubmit={handleSubmit}>
 
         <div className="form-group">
@@ -62,6 +66,15 @@ function CadastroProduto() {
             step="0.01"
             value={preco}
             onChange={(e) => setPreco(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Estoque:</label>
+          <input
+            type="number"
+            value={estoque}
+            onChange={(e) => setEstoque(e.target.value)}
           />
         </div>
 

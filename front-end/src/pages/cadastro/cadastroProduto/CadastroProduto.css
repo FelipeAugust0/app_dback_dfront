@@ -1,44 +1,89 @@
+/*
+ * CadastroProduto.css
+ * Estilos para o formulário de Cadastro de Produto
+ */
+
+/* 1. Container Principal e Centralização */
 .container-cadastro {
-  max-width: 450px;
-  margin: auto;
-  background: #f2f2f2;
-  padding: 20px;
-  border-radius: 8px;
+    max-width: 550px; /* Um pouco mais largo que o de Categoria */
+    margin: 40px auto; /* Centraliza vertical e horizontalmente */
+    padding: 30px;
+    background-color: #ffffff; /* Fundo branco ou quase branco */
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
+/* 2. Título do Formulário */
 h2 {
-  text-align: center;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
+/* 3. Grupo de Formulário (Label + Input) */
 .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 12px;
+    margin-bottom: 25px;
 }
 
-label {
-  margin-bottom: 6px;
-  font-weight: 500;
+/* 4. Rótulo (Label) */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+    font-size: 1.05em;
 }
 
-input {
-  padding: 8px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
-  font-size: 16px;
+/* 5. Campos de Input (Texto e Números) */
+.form-group input[type="text"],
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd; 
+    border-radius: 6px;
+    box-sizing: border-box; 
+    font-size: 1em;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s; 
 }
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #005eff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus {
+    border-color: #007bff; 
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+    outline: none;
 }
 
-button:hover {
-  background-color: #013fa3;
+/* 6. Botão de Submissão */
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #007bff; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.15em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+button[type="submit"]:active {
+    transform: scale(0.99);
+}
+
+/* 7. Responsividade */
+@media (max-width: 600px) {
+    .container-cadastro {
+        margin: 20px;
+        padding: 20px;
+    }
 }

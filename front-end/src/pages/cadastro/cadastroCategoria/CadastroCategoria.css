@@ -1,0 +1,84 @@
+/*
+ * CadastroCategoria.css
+ * Estilos para o formulário de Cadastro de Categoria
+ */
+
+/* 1. Container Principal e Centralização */
+.container-cadastro {
+    max-width: 500px;
+    margin: 60px auto; 
+    padding: 30px;
+    background-color: #fcfcfc;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Título do Formulário */
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.8em;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* 3. Grupo de Formulário (Label + Input) */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* 4. Rótulo (Label) */
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+/* 5. Campo de Input */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-sizing: border-box; 
+    font-size: 1em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input[type="text"]:focus {
+    border-color: #007bff; 
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+    outline: none;
+}
+
+/* 6. Botão de Submissão */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #424242; 
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+    background-color: #000000; 
+}
+
+button[type="submit"]:active {
+    transform: scale(0.99);
+}
+
+/* 7. Responsividade (Ajuste para telas muito pequenas) */
+@media (max-width: 550px) {
+    .container-cadastro {
+        margin: 20px;
+        padding: 20px;
+    }
+}

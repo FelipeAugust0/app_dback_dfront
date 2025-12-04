@@ -1,71 +1,128 @@
-.lista-categoria {
-  width: 85%;
-  margin: auto;
-  margin-top: 20px;
+/*
+ * ListaCategoria.css
+ * Estilos para a Listagem de Categorias
+ */
+
+/* Container Principal */
+.ListaCategoria-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.lista-categoria h2 {
-  text-align: center;
-  margin-bottom: 15px;
+h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
 }
 
-.lista-categoria ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Lista */
+ul {
+    list-style: none;
+    padding: 0;
 }
 
-.lista-categoria li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px;
-  border-bottom: 1px solid #3b3b3b;
-  font-size: 15px;
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
 }
 
-.lista-categoria li:nth-child(even) {
-  background-color: #2f2f2f;
+li:hover {
+    background-color: #f5f5f5;
 }
 
-.lista-categoria span {
-  flex: 1;
-  text-align: left;
+/* Nome da Categoria */
+li span {
+    font-size: 1.1em;
+    color: #555;
+    font-weight: 500;
 }
 
-.lista-categoria input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #555;
-  border-radius: 6px;
-  background-color: #1a1a1a;
-  color: white;
+/* Grupo de Botões (Padrão e Edição) */
+.button-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
+/* Estilo Base dos Botões */
 button {
-  padding: 6px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-left: 8px;
-  color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
-button:hover {
-  opacity: 0.8;
+button:active {
+    transform: scale(0.98);
 }
 
-button:nth-of-type(1) {
-  background-color: #005eff; /* edição */
+/* Botão de Edição */
+.editar {
+    background-color: #007bff; 
+    color: white;
 }
 
-button:nth-of-type(2) {
-  background-color: red; /* deletar */
+.editar:hover {
+    background-color: #0056b3;
 }
 
-p {
-  text-align: center;
-  font-style: italic;
-  color: #c9c9c9;
+/* Botão de Excluir/Deletar */
+.deletar {
+    background-color: #dc3545; 
+    color: white;
 }
 
+.deletar:hover {
+    background-color: #c82333;
+}
+
+/* Botão de Salvar */
+.salvar {
+    background-color: #28a745; 
+    color: white;
+}
+
+.salvar:hover {
+    background-color: #1e7e34;
+}
+
+/* Botão de Cancelar */
+.cancelar {
+    background-color: #6c757d;
+    color: white;
+}
+
+.cancelar:hover {
+    background-color: #5a6268;
+}
+
+/* Input durante a Edição */
+li input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    width: 200px; 
+    margin-right: 10px;
+}
+
+/* Estilo específico para o item em edição (opcional) */
+li.edit-mode {
+    border-left: 5px solid #007bff;
+    background-color: #e6f0ff;
+}

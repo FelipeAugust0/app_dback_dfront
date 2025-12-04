@@ -1,97 +1,29 @@
-/* Reset básico para consistência */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
-/* Fundo geral */
+/* Corpo da aplicação */
 body {
-  background-color: #f4f6f8;
+  background-color: #f5f5f5;
+  color: #333;
 }
 
-/* Container principal abaixo do navbar */
+/* Conteúdo principal */
 .mainContent {
   padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Títulos */
-h1, h2 {
-  color: #333;
-  margin-bottom: 15px;
-}
-
-/* Estilo dos formulários */
-input, select {
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #aaa;
-  width: 100%;
-  margin-bottom: 12px;
-  font-size: 15px;
-}
-
-/* Botões padrão */
-button {
-  background-color: #005eff;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 15px;
-}
-
-button:hover {
-  background-color: #003bb5;
-}
-
-/* Tabela */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background: white;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-th {
-  background-color: #222;
-  color: white;
-  padding: 10px;
-  text-align: left;
-}
-
-td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Botão delete */
-.btn-delete {
-  background-color: red;
-}
-
-.btn-delete:hover {
-  background-color: rgb(185, 0, 0);
-}
-
-/* Botão editar */
-.btn-edit {
-  background-color: #25c80b;
-}
-
-.btn-edit:hover {
-  background-color: #1f9e0b;
-}
-
-/* Card padrão — útil para HOME */
-.card {
-  background: white;
+/* Estilo para páginas */
+.page {
+  background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 2px 6px;
-  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  margin-top: 20px;
 }

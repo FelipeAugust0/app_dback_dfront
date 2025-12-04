@@ -1,83 +1,101 @@
 import React, { useEffect, useState } from "react";
+import { getProdutos, deleteProduto, updateProduto } from "../../../api/Api";
 import "./ListaProduto.css";
 
-function ListaProduto() {
-
+const ListaProduto = () => {
   const [produtos, setProdutos] = useState([]);
-
-  const buscarProdutos = async () => {
-    try {
-      const response = await fetch("http://localhost:4567/produtos");
-      const data = await response.json();
-      setProdutos(data);
-    } catch (error) {
-      console.log("Erro ao buscar produtos:", error);
-    }
-  };
-
-  const deletarProduto = async (id) => {
-    if (!window.confirm("Tem certeza que deseja excluir este produto?")) return;
-
-    try {
-      const response = await fetch(`http://localhost:4567/produtos/${id}`, {
-        method: "DELETE"
-      });
-
-      if (response.ok) {
-        alert("Produto removido!");
-        buscarProdutos();
-      } else {
-        alert("Erro ao remover produto");
-      }
-
-    } catch (error) {
-      alert("Erro de conexão com backend");
-    }
-  };
+  const [editando, setEditando] = useState(null);
+  const [novoNome, setNovoNome] = useState("");
+  const [novoPreco, setNovoPreco] = useState("");
 
   useEffect(() => {
-    buscarProdutos();
+    carregarProdutos();
   }, []);
 
+  const carregarProdutos = async () => {
+    const data = await getProdutos();
+    setProdutos(data);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este produto?")) {
+      await deleteProduto(id);
+      carregarProdutos();
+    }
+  };
+
+  const handleEdit = (produto) => {
+    setEditando(produto.id);
+    setNovoNome(produto.nome);
+    setNovoPreco(produto.preco.toString()); 
+  };
+
+  const handleSave = async (id) => {
+    if (!novoNome.trim() || !novoPreco.trim() || isNaN(parseFloat(novoPreco))) {
+      return alert("Por favor, preencha nome e preço válidos.");
+    }
+    
+    // Encontra o produto original para manter outros campos
+    const produtoOriginal = produtos.find(p => p.id === id);
+
+    const dadosAtualizados = {
+        ...produtoOriginal,
+        nome: novoNome.trim(),
+        preco: parseFloat(novoPreco), 
+    };
+
+    await updateProduto(id, dadosAtualizados);
+    
+    setEditando(null);
+    setNovoNome("");
+    setNovoPreco("");
+    carregarProdutos();
+  };
+
   return (
-    <div className="container-produto">
+    <div className="ListaProduto-container">
       <h2>Lista de Produtos</h2>
-
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Estoque</th>
-            <th>Categoria</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {produtos.map((item) => (
-            <tr key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.nome}</td>
-              <td>R$ {item.preco.toFixed(2)}</td>
-              <td>{item.estoque}</td>
-              <td>{item.id_categoria}</td>
-              <td>
-                <button className="btn-delete" onClick={() => deletarProduto(item.id)}>
-                  Excluir
-                </button>
-
-                <button className="btn-edit">
-                  Editar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <ul>
+        {produtos.map((produto) => (
+          <li 
+            key={produto.id}
+            className={editando === produto.id ? "edit-mode" : ""}
+          >
+            {editando === produto.id ? (
+              <div className="button-group edit-fields">
+                <input
+                  type="text"
+                  placeholder="Nome"
+                  value={novoNome}
+                  onChange={(e) => setNovoNome(e.target.value)}
+                />
+                <input
+                  type="number"
+                  placeholder="Preço"
+                  value={novoPreco}
+                  onChange={(e) => setNovoPreco(e.target.value)}
+                  min="0.01"
+                  step="0.01"
+                />
+                <button className="salvar" onClick={() => handleSave(produto.id)}>Salvar</button>
+                <button className="cancelar" onClick={() => setEditando(null)}>Cancelar</button>
+              </div>
+            ) : (
+              <>
+                <span className="produto-info">
+                    {produto.nome} - R$ {produto.preco.toFixed(2).replace('.', ',')}
+                </span>
+                <div className="button-group">
+                  <button className="editar" onClick={() => handleEdit(produto)}>Editar</button>
+                  <button className="deletar" onClick={() => handleDelete(produto.id)}>Excluir</button>
+                </div>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default ListaProduto;

@@ -1,33 +1,102 @@
+/*
+ * NavBar.css
+ * Estilos para a Barra de Navegação Principal
+ */
+
+/* 1. Container Principal */
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #222;
-  padding: 12px 20px;
+    background-color: #ffffff; /* Fundo verde do seu layout */
+    display: flex;
+    /* Ajustado para centralizar e manter o logo à esquerda e links à direita */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 15px 30px;
+    min-height: 60px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* 2. Logo/Marca */
 .nav-logo {
-  color: #fff;
-  font-size: 20px;
+    font-size: 1.8em;
+    font-weight: bold;
+    color: #000000;
+    letter-spacing: 1px;
 }
 
+/* 3. Lista de Links */
 .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
+    list-style: none; /* Remove os marcadores de lista */
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 20px; /* Espaço entre os itens da lista */
 }
 
+/* 4. Item Individual da Lista */
+.nav-links li {
+    padding: 5px 10px;
+    position: relative; 
+}
+
+/* 5. O Link (Tag <a> ou <Link>) */
 .nav-links li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
+    color: #000000; 
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    transition: color 0.3s;
+    display: block;
 }
 
 .nav-links li:hover a {
-  color: yellow;
+    color: #000000; 
 }
 
-.active a {
-  color: #00ffea !important;
-  text-decoration: underline;
+/* 6. Estilo do Item ATIVO (Selecionado) */
+.nav-links li.active a {
+    color: #000000; 
+    font-weight: bold;
+}
+
+/* O Sublinhado Amarelo para o Item Ativo */
+.nav-links li.active::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; 
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background-color: #000000; 
+    border-radius: 2px;
+}
+
+/* Responsividade: Ajuste para telas menores (ex: mobile) */
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        padding: 15px 10px;
+        height: auto;
+    }
+    
+    .nav-logo {
+        margin-bottom: 10px;
+    }
+
+    .nav-links {
+        /* Permite que os links quebrem a linha */
+        flex-wrap: wrap; 
+        justify-content: center;
+        gap: 15px 10px;
+    }
+
+    .nav-links li {
+        padding: 5px;
+    }
+
+    /* Sublinhado em mobile pode ser menor */
+    .nav-links li.active::after {
+        bottom: -5px; 
+        left: 5px;
+        right: 5px;
+    }
 }

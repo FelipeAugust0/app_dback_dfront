@@ -46,10 +46,10 @@ public class ApiProduto {
             return "OK";
         });
 
-        before((request, response) -> {
-            response.header("Access-Control-Allow-Origin", "http://localhost:5173");
-            response.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-            response.header("Access-Control-Allow-Headers", "*");
+        before((req, res) -> {
+            res.header("Access-Control-Allow-Origin", "*");
+            res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+            res.header("Access-Control-Allow-Headers", "Content-Type");
         });
 
         // ============================
@@ -188,7 +188,7 @@ public class ApiProduto {
                 categoriaDAO.deletar(id);
                 response.status(204);
                 return "";
-            } catch (Exception e){
+            } catch (Exception e) {
                 response.status(500);
                 return "{\"mensagem\": \"Erro ao deletar categoria.\"}";
             }

@@ -1,102 +1,85 @@
 import React, { useEffect, useState } from "react";
+import { getCategorias, deleteCategoria, updateCategoria } from "../../../api/Api";
 import "./ListaCategoria.css";
 
-function ListaCategoria() {
+const ListaCategoria = () => {
   const [categorias, setCategorias] = useState([]);
-  const [editarId, setEditarId] = useState(null);
-  const [newNome, setNewNome] = useState("");
+  const [editando, setEditando] = useState(null);
+  const [novoNome, setNovoNome] = useState("");
 
-  // GET CATEGORIAS DO BACKEND
-  const buscarCategorias = async () => {
-    try {
-      const response = await fetch("http://localhost:4567/categorias");
-      const data = await response.json();
-      setCategorias(data);
-    } catch (error) {
-      console.log("Erro ao carregar categorias:", error);
-    }
+  useEffect(() => {
+    carregarCategorias();
+  }, []);
+
+  const carregarCategorias = async () => {
+    const data = await getCategorias();
+    setCategorias(data);
   };
 
-  // DELETE CATEGORIA NO BACKEND
   const handleDelete = async (id) => {
-    if (!window.confirm("Tem certeza que deseja excluir?")) return;
-
-    try {
-      const response = await fetch(`http://localhost:4567/categorias/${id}`, {
-        method: "DELETE"
-      });
-      if (response.ok) {
-        alert("Categoria removida!");
-        buscarCategorias();
-      } else {
-        alert("Erro ao remover categoria");
-      }
-    } catch (error) {
-      alert("Erro de conexão com backend");
-    }
-  };
-
-  // PUT / UPDATE CATEGORIA
-  const handleSave = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:4567/categorias/${id}`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nome: newNome }),
-      });
-
-      if (response.ok) {
-        alert("Categoria atualizada!");
-        buscarCategorias();
-        setEditarId(null);
-      } else {
-        alert("Erro ao atualizar categoria");
-      }
-    } catch (error) {
-      alert("Erro de conexão com backend");
+    // Adicionar confirmação aqui seria uma boa prática!
+    if (window.confirm("Tem certeza que deseja excluir esta categoria?")) {
+        await deleteCategoria(id);
+        carregarCategorias();
     }
   };
 
   const handleEdit = (categoria) => {
-    setEditarId(categoria.id);
-    setNewNome(categoria.nome);
+    setEditando(categoria.id);
+    setNovoNome(categoria.nome);
   };
 
-  useEffect(() => {
-    buscarCategorias();
-  }, []);
+  const handleSave = async (id) => {
+    // Prevenção simples contra nome vazio
+    if (!novoNome.trim()) return alert("O nome da categoria não pode ser vazio.");
+    
+    // O seu código original para encontrar a categoria e atualizar o nome é perfeito:
+    const categoriaAtualizada = categorias.find(c => c.id === id);
+
+    await updateCategoria(id, { ...categoriaAtualizada, nome: novoNome.trim() });
+    
+    setEditando(null);
+    carregarCategorias();
+  };
 
   return (
-    <div className="lista-categoria">
+    // Adicionando a classe principal aqui
+    <div className="ListaCategoria-container">
       <h2>Lista de Categorias</h2>
-      {categorias.length === 0 ? (
-        <p>Nenhuma categoria cadastrada</p>
-      ) : (
-        <ul>
-          {categorias.map((categoria) => (
-            <li key={categoria.id}>
-              {editarId === categoria.id ? (
-                <>
+      <ul>
+        {categorias.map((categoria) => (
+          <li 
+            key={categoria.id} 
+            className={editando === categoria.id ? "edit-mode" : ""}
+          >
+            {editando === categoria.id ? (
+              <>
+                {/* O input não precisa de div extra se a li já for flex */}
+                <div className="button-group">
                   <input
                     type="text"
-                    value={newNome}
-                    onChange={(e) => setNewNome(e.target.value)}
+                    value={novoNome}
+                    onChange={(e) => setNovoNome(e.target.value)}
                   />
-                  <button onClick={() => handleSave(categoria.id)}>Salvar</button>
-                </>
-              ) : (
-                <>
-                  <span>{categoria.nome}</span>
-                  <button onClick={() => handleEdit(categoria)}>Editar</button>
-                  <button onClick={() => handleDelete(categoria.id)}>Deletar</button>
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+                  {/* Mudando para classe 'salvar' */}
+                  <button className="salvar" onClick={() => handleSave(categoria.id)}>Salvar</button>
+                  <button className="cancelar" onClick={() => setEditando(null)}>Cancelar</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <span>{categoria.nome}</span>
+                <div className="button-group">
+                  <button className="editar" onClick={() => handleEdit(categoria)}>Editar</button>
+                  <button className="deletar" onClick={() => handleDelete(categoria.id)}>Excluir</button>
+                </div>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default ListaCategoria;

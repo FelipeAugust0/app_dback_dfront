@@ -1,34 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { createCategoria } from "../../../api/Api";
 import "./CadastroCategoria.css";
 
-function CadastroCategoria({ categoria, setCategoria }) {
+const CadastroCategoria = () => {
   const [nome, setNome] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const NewNome = { id: Date.now(), nome };
+    if (!nome) {
+      alert("Informe o nome da categoria.");
+      return;
+    }
 
-    setCategoria([...categoria, NewNome]);
+    try {
+      const response = await createCategoria({ nome });
 
-    setNome("");
+      if (response && response.id) {
+        alert("Categoria cadastrada com sucesso!");
+        setNome("");
+      } else {
+        alert("Erro ao cadastrar a categoria.");
+      }
+    } catch (error) {
+      alert("Erro de conexão com o servidor.");
+      console.error(error);
+    }
   };
 
   return (
-    <div className="CadastrodeCategoria">
-      <h2>Cadastrar categoria</h2>
-
+    <div className="container-cadastro">
+      <h2>Cadastrar Categoria</h2>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Nome"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-        />
-        <button type="submit">Salvar</button>
+        <div className="form-group">
+          <label>Nome da Categoria:</label>
+          <input
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Digite o nome"
+            required
+          />
+        </div>
+        <button type="submit">Cadastrar</button>
       </form>
     </div>
   );
-}
+};
 
 export default CadastroCategoria;
