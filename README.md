@@ -39,48 +39,46 @@ O projeto segue uma arquitetura clara, dividida em duas partes principais:
 
 ---
 
- 1º Passo: Clonar o Repositório
+ 1º Passo: Clonar o Repositório. No prompt de comando, digite:
 
-No prompt de comando, digite:
-
-cmd
-git clone https://github.com/FelipeAugust0/app_dback_dfront.git
-cd app_dback_dfront
+* cmd
+* git clone https://github.com/FelipeAugust0/app_dback_dfront.git
+* cd app_dback_dfront
 
 ---
 
  2º Passo: Configurar e Iniciar o Backend (Java). Essa é a mais importante etapa para garantir a persistência dos dados:
 
-Instalação/Servidor: Certifique-se de que o seu servidor de banco de dados “MySQL” esteja rodando.
+* Instalação/Servidor: Certifique-se de que o seu servidor de banco de dados “MySQL” esteja rodando.
 
-Criação do Schema: Crie um novo banco de dados (schema) chamado “aulajdbc.sql” (cole a query disponível na pasta “back-end” do projeto).
+* Criação do Schema: Crie um novo banco de dados (schema) chamado “aulajdbc.sql” (cole a query disponível na pasta “back-end” do projeto).
 
-Ajuste de Credenciais: Edite o arquivo de configuração da aplicação Java (“ConnectionFactory.java” na pasta backend/src/util):
+* Ajuste de Credenciais. Edite o arquivo de configuração da aplicação Java (“ConnectionFactory.java” na pasta backend/src/util):
 
-Java
-private static final String USER = "SEUUSUaRIO";
-private static final String PASS = "SUAPASSWORD";
+* Java:
+* private static final String USER = "SEUUSUARIO";
+* private static final String PASS = "SUAPASSWORD";
 
 
 Execute o arquivo “ApiProduto.java” pelo VS Code ou ser compilado pelo Prompt de Comando, via Maven ou Gradle e depois executar:
 
-cmd
-java -jar target/ApiProduto.java.jar
+* No cmd:
+* java -jar target/ApiProduto.java.jar
 
 ---
 
  3º Passo: Iniciar o Frontend (React). Em um novo terminal, navegue até “/front-end” e inicie a aplicação React:
 
-cmd
-cd front-end
-npm install react-router-dom
-npm install
-npm start
+* No cmd:
+* cd front-end
+* npm install react-router-dom
+* npm install
+* npm start
 
-O Frontend será iniciado em http://localhost:3000.
+* O Frontend será iniciado em http://localhost:3000.
 
 ---
 
 
 ### Contribuição
-Contribuições, issues e sugestões são bem-vindas! Sinta-se à vontade para abrir um Pull Request.
+* Contribuições, issues e sugestões são bem-vindas! Sinta-se à vontade para abrir um Pull Request.
